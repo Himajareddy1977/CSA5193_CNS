@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#define SHA512_BLOCK_SIZE 64
+#define SHA512_DIGEST_SIZE 32
+static const uint32_t K[64] = {
+    0x428a26, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
+};
+static const uint32_t H[8] = {
+    0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
+    0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19,
+};
+void sha512_transform(uint32_t *state, const uint8_t block[SHA512_BLOCK_SIZE]);
+void sha512(const char *message, uint8_t *digest);
+int main() {
+    const char *input_message = "Hello, SHA-512!";
+    uint8_t sha512_digest[SHA512_DIGEST_SIZE];
+    sha512(input_message, sha512_digest);
+    printf("Input Message: %s\n", input_message);
+    printf("SHA-512 Hash: ");
+    for (int i = 0; i < SHA512_DIGEST_SIZE; i++) {
+        printf("%02x", sha512_digest[i]);
+    }
+}
+void sha512_transform(uint32_t *state, const uint8_t block[SHA512_BLOCK_SIZE]) {
+}
+void sha512(const char *message, uint8_t *digest) {
+}
