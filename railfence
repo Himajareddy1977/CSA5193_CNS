@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+void encryptRailFence(char *input, int rails, char *encrypted) {
+    int len = strlen(input);
+    int index = 0;
+    for (int i = 0; i < rails; ++i) {
+        for (int j = i; j < len; j += rails) {
+            encrypted[index++] = input[j];
+        }
+    }
+    encrypted[index] = '\0';
+}
+void decryptRailFence(char *input, int rails, char *decrypted) {
+    int len = strlen(input);
+    int index = 0;
+    for (int i = 0; i < rails; ++i) {
+        for (int j = i; j < len; j += rails) {
+            decrypted[j] = input[index++];
+        }
+    }
+    decrypted[len] = '\0';
+}
+
+void printMessage(const char *label, char *message) {
+    printf("%s: %s\n", label, message);
+}
+int main() {
+    char input[100], encrypted[100], decrypted[100];
+    int rails;
+    printf("Enter the message to encrypt:\n");
+    fgets(input, sizeof(input), stdin);
+    input[strcspn(input, "\n")] = '\0';
+    printf("Enter the number of rails:\n");
+    scanf("%d", &rails);
+    encryptRailFence(input, rails, encrypted);
+    printMessage("Encrypted message", encrypted);
+    decryptRailFence(encrypted, rails, decrypted);
+    printMessage("Decrypted message", decrypted);
+    return 0;
+}
+
+
